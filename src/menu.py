@@ -93,7 +93,6 @@ class Menu:
                 if element[3] is not None:
                     if element[3] == "quit":
                         self.run = False
-                        print('quit')
                     else:
                         element[3]()
 
