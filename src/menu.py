@@ -14,14 +14,37 @@ class Menu:
 
     def add_label(self, x, y, text, size=font_size, color=font_color):
         text_surf, text_rect = text_objects(text, size, color=color)
-        element = [(x, y), text_surf]
+        element = [[x, y], text_surf]
         self.labels.append(element)
 
     def add_button(self, x, y, text, action=None, size=font_size, color=font_color):
         text_surf, text_rect = text_objects(text, size, color=color)
         text_rect = get_outline(text_rect, outline=self.outline)
-        element = [(x, y), text_surf, text_rect, action]
+        element = [[x, y], text_surf, text_rect, action]
         self.buttons.append(element)
+
+    def auto_layout(self, display):
+        # 1. get biggest width element
+        # 2. impose width on all element
+        # 3. x = display.w / nb element - rect.w
+        
+        max_width = 0
+        for button in self.buttons:
+            if button[2].w > max_width:
+                max_width = button[2].w
+
+        for button in self.buttons:
+            button[2].w = max_width
+
+        w, h = display.get_size()
+        x_incr = w / (len(self.buttons) + 1)
+        y = h * (3 / 4)
+
+        index = 1
+        for button in self.buttons:
+            pos = [x_incr * index - (button[2].w / 2), y]
+            button[0] = pos
+            index += 1
 
     def update(self, mouse_pos):
         for element in self.buttons:
