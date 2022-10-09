@@ -1,4 +1,4 @@
-from .var import BLACK, WHITE, RED, BLUE, GREEN
+from .var import BLACK, WHITE, RED, templates
 from .hud import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
 
 
@@ -8,18 +8,26 @@ class Menu:
     outline = 1
     outline_color = BLACK
     background_color = WHITE
+    screen_color = WHITE
 
     def __init__(self):
         self.labels = []
         self.buttons = []
 
     def set_properties(self, font_color=font_color, font_size=font_size, outline_color=outline_color,
-                       outline=outline, background_color=background_color):
-        self.font_color = RED
+                       outline=outline, background_color=background_color, screen_color=screen_color):
+        self.font_color = font_color
         self.font_size = 35
         self.outline = 1
-        self.outline_color = BLACK
-        self.background_color = BLUE
+        self.outline_color = outline_color
+        self.background_color = background_color
+        self.screen_color = screen_color
+
+    def template(self, template_key):
+        self.set_properties(font_color=templates[template_key]["font_color"],
+                            outline_color=templates[template_key]["outline_color"],
+                            background_color=templates[template_key]["background_color"],
+                            screen_color=templates[template_key]["screen_color"])
 
     def add_label(self, x, y, text, size=font_size, color=font_color):
         text_surf, text_rect = text_objects(text, size, color=color)
@@ -77,6 +85,7 @@ class Menu:
                     element[3]()
 
     def draw(self, display):
+        display.fill(self.screen_color)
         if len(self.labels) > 0:
             for element in self.labels:
                 draw_text_objects(display, element[0], element[1])
