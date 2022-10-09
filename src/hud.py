@@ -1,5 +1,5 @@
 import pygame
-from .locals import m5x7, WHITE, BLACK
+from .var import m5x7, WHITE, BLACK
 
 
 def text_objects(text, size, color=WHITE):
@@ -9,10 +9,35 @@ def text_objects(text, size, color=WHITE):
     return text_surf, text_rect
 
 
+def draw_text_objects(display, pos, surf):
+    display.blit(surf, pos)
+
+
+def button_is_active(rect, pos):
+    if rect.collidepoint(pos):
+        if pygame.mouse.get_pressed()[0]:
+            return True
+    return False
+
+
+def get_outline(rect, outline):
+    rect.x -= outline
+    rect.y -= outline
+    rect.w += 2 * outline
+    rect.h += 2 * outline
+    return rect
+
+
+def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK):
+    draw_text_objects(display, pos, surf)
+    rect.x, rect.y = pos[0], pos[1]
+    pygame.draw.rect(display, outline_color, rect, outline)
+
+
 def label(display, x, y, text, size, color=WHITE):
     text_surf, text_rect = text_objects(text, size, color=color)
     display.blit(text_surf, (x, y))
-
+    
 
 def button(display, x, y, text, size, pos, action=None, font_color=WHITE, outline_color=BLACK, outline=3):
     text_surf, text_rect = text_objects(text, size, color=font_color)
@@ -22,9 +47,8 @@ def button(display, x, y, text, size, pos, action=None, font_color=WHITE, outlin
     text_rect.w += 2 * outline
     text_rect.h += 2 * outline
 
-    if text_rect.collidepoint(pos) and action is not None:
-        if pygame.mouse.get_pressed()[0]:
-            action()
+    if button_is_active(text_rect, pos) and action is not None:
+        action() 
 
     display.blit(text_surf, (x, y))
     pygame.draw.rect(display, outline_color, text_rect, outline)
