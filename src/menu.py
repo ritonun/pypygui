@@ -7,9 +7,9 @@ import pygame
 class Menu:
     font_size = 45
     outline = 1
-    outline_color = BLACK
-    background_color = WHITE
-    screen_color = WHITE
+    outline_color = (121, 85, 74)
+    background_color = (179, 190, 196)
+    screen_color = (42, 64, 84)
 
     def __init__(self, font_color=WHITE):
         self.labels = []
