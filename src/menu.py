@@ -1,9 +1,11 @@
 from .var import BLACK, WHITE, templates
 from .hud import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
+import sys
+import pygame
 
 
 class Menu:
-    font_size = 35
+    font_size = 45
     outline = 1
     outline_color = BLACK
     background_color = WHITE
@@ -13,12 +15,12 @@ class Menu:
         self.labels = []
         self.buttons = []
         self.font_color = font_color
+        self.run = True
 
     @classmethod
     def properties(cls, font_size=font_size, outline_color=outline_color,
                    outline=outline, background_color=background_color, screen_color=screen_color):
         cls.font_size = font_size
-        
         cls.outline = outline
         cls.outline_color = outline_color
         cls.background_color = background_color
@@ -34,6 +36,8 @@ class Menu:
         if color is None:
             color = self.font_color
         text_surf, text_rect = text_objects(text, size, color=color)
+        x -= text_rect.w / 2
+        y -= text_rect.h / 2
         element = [[x, y], text_surf]
         self.labels.append(element)
 
@@ -86,8 +90,12 @@ class Menu:
     def update(self, mouse_pos):
         for element in self.buttons:
             if button_is_active(element[2], mouse_pos):
-                if element[3]() is not None:
-                    element[3]()
+                if element[3] is not None:
+                    if element[3] == "quit":
+                        self.run = False
+                        print('quit')
+                    else:
+                        element[3]()
 
     def draw(self, display):
         display.fill(self.screen_color)
@@ -99,3 +107,19 @@ class Menu:
             for element in self.buttons:
                 draw_button(display, element[0], element[1], element[2], outline=self.outline, 
                             outline_color=self.outline_color, background_color=self.background_color)
+
+    def mainloop(self, display):
+        clock = pygame.time.Clock()
+        while self.run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit(0)
+            display.fill(WHITE)
+            
+            pos = pygame.mouse.get_pos()
+            self.update(pos)
+            self.draw(display)
+
+            pygame.display.update()
+            clock.tick(15)

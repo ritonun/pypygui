@@ -16,7 +16,7 @@ templates = {
         "screen_color": (1,205,254)
     },
     "default": {
-        "font_color": WHITE,
+        "font_color": RED,
         "outline_color": (121,85,74),
         "background_color": (179,190,196),
         "screen_color": (42,64,84)
