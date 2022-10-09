@@ -23,7 +23,7 @@ class Menu:
         element = [[x, y], text_surf, text_rect, action]
         self.buttons.append(element)
 
-    def auto_layout(self, display):
+    def auto_layout(self, display, axis="horizontal"):
         # 1. get biggest width element
         # 2. impose width on all element
         # 3. x = display.w / nb element - rect.w
@@ -37,14 +37,26 @@ class Menu:
             button[2].w = max_width
 
         w, h = display.get_size()
-        x_incr = w / (len(self.buttons) + 1)
-        y = h * (3 / 4)
 
-        index = 1
-        for button in self.buttons:
-            pos = [x_incr * index - (button[2].w / 2), y]
-            button[0] = pos
-            index += 1
+        if axis == "horizontal":
+            x_incr = w / (len(self.buttons) + 1)
+            y = h * (3 / 4)
+
+            index = 1
+            for button in self.buttons:
+                pos = [x_incr * index - (button[2].w / 2), y]
+                button[0] = pos
+                index += 1
+
+        elif axis == "vertical":
+            x = (w * (1 / 2)) - (max_width / 2)
+            y_incr = h / (len(self.buttons) + 1)
+
+            index = 1
+            for button in self.buttons:
+                pos = [x, y_incr * index - (button[2].h / 2)]
+                button[0] = pos
+                index += 1
 
     def update(self, mouse_pos):
         for element in self.buttons:
