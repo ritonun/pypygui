@@ -32,9 +32,9 @@ def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK, backgr
     # background color
     pygame.draw.rect(display, background_color, rect)
     # text
-    draw_text_objects(display, pos, surf)
+    text_pos = [pos[0] + outline + (rect.w / 2) - (surf.get_rect().w / 2), pos[1]]
+    draw_text_objects(display, text_pos, surf)
     # outline
-    rect.x, rect.y = pos[0], pos[1]
     pygame.draw.rect(display, outline_color, rect, outline)
 
 

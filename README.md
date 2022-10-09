@@ -14,3 +14,4 @@ PyPyGui is a GUI/HUD library for pygame.
 
 ## Future function
 - [ ] Hud elements (img)
+- [ ] auto-doc with sphynx

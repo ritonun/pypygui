@@ -28,6 +28,7 @@ class Menu:
 
     def add_button(self, x, y, text, action=None, size=font_size, color=font_color):
         text_surf, text_rect = text_objects(text, size, color=color)
+        text_rect.x, text_rect.y = x, y
         text_rect = get_outline(text_rect, outline=self.outline)
         element = [[x, y], text_surf, text_rect, action]
         self.buttons.append(element)
@@ -55,6 +56,7 @@ class Menu:
             for button in self.buttons:
                 pos = [x_incr * index - (button[2].w / 2), y]
                 button[0] = pos
+                button[2].x, button[2].y = pos
                 index += 1
 
         elif axis == "vertical":
@@ -65,6 +67,7 @@ class Menu:
             for button in self.buttons:
                 pos = [x, y_incr * index - (button[2].h / 2)]
                 button[0] = pos
+                button[2].x, button[2].y = pos
                 index += 1
 
     def update(self, mouse_pos):
