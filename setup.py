@@ -6,11 +6,11 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pypygui",
-    version="0.0.1",
+    version="0.1",
     description="GUI/HUD library for pygame",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # url= *github repo link*
+    url="https://github.com/ritonun/pypygui",
     author="riton",
     # author_email=
     classifiers=[
@@ -27,6 +27,6 @@ setup(
     install_requires=[
         "pygame >= 2.0.0"
     ],
-    data_files=[("fonts", ["res/fonts/m5x7.ttf"])]
-    # project_urls={"source": github_repo}
+    data_files=[("fonts", ["res/fonts/m5x7.ttf"])],
+    project_urls={"source": "https://github.com/ritonun/pypygui"}
 )
