@@ -46,8 +46,8 @@ class Menu:
             color = self.font_color
         text_surf, text_rect = text_objects(text, size, color=color)
         text_rect.x, text_rect.y = x, y
-        text_rect = get_outline(text_rect, outline=self.outline)
-        element = [[x, y], text_surf, text_rect, action]
+        rect = get_outline(text_rect, outline=self.outline)
+        element = [[x, y], text_surf, rect, action]
         self.buttons.append(element)
 
     def auto_layout(self, display, axis="horizontal"):

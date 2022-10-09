@@ -31,12 +31,12 @@ def get_outline(rect, outline):
 def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK, background_color=WHITE):
     # background color
     pygame.draw.rect(display, background_color, rect)
+    # outline
+    pygame.draw.rect(display, outline_color, rect, outline)
     # text
     text_pos = [pos[0] + outline + (rect.w / 2) - (surf.get_rect().w / 2), pos[1]]
     draw_text_objects(display, text_pos, surf)
-    # outline
-    pygame.draw.rect(display, outline_color, rect, outline)
-
+    
 
 def label(display, x, y, text, size, color=WHITE):
     text_surf, text_rect = text_objects(text, size, color=color)
