@@ -1,40 +1,45 @@
-from .var import BLACK, WHITE, RED, templates
+from .var import BLACK, WHITE, templates
 from .hud import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
 
 
 class Menu:
-    font_color = RED
     font_size = 35
     outline = 1
     outline_color = BLACK
     background_color = WHITE
     screen_color = WHITE
 
-    def __init__(self):
+    def __init__(self, font_color=WHITE):
         self.labels = []
         self.buttons = []
-
-    def set_properties(self, font_color=font_color, font_size=font_size, outline_color=outline_color,
-                       outline=outline, background_color=background_color, screen_color=screen_color):
         self.font_color = font_color
-        self.font_size = 35
-        self.outline = 1
-        self.outline_color = outline_color
-        self.background_color = background_color
-        self.screen_color = screen_color
+
+    @classmethod
+    def properties(cls, font_size=font_size, outline_color=outline_color,
+                   outline=outline, background_color=background_color, screen_color=screen_color):
+        cls.font_size = font_size
+        
+        cls.outline = outline
+        cls.outline_color = outline_color
+        cls.background_color = background_color
+        cls.screen_color = screen_color
 
     def template(self, template_key):
-        self.set_properties(font_color=templates[template_key]["font_color"],
-                            outline_color=templates[template_key]["outline_color"],
-                            background_color=templates[template_key]["background_color"],
-                            screen_color=templates[template_key]["screen_color"])
+        self.font_color = templates[template_key]["font_color"]
+        self.properties(outline_color=templates[template_key]["outline_color"],
+                        background_color=templates[template_key]["background_color"],
+                        screen_color=templates[template_key]["screen_color"])
 
-    def add_label(self, x, y, text, size=font_size, color=font_color):
+    def add_label(self, x, y, text, size=font_size, color=None):
+        if color is None:
+            color = self.font_color
         text_surf, text_rect = text_objects(text, size, color=color)
         element = [[x, y], text_surf]
         self.labels.append(element)
 
-    def add_button(self, x, y, text, action=None, size=font_size, color=font_color):
+    def add_button(self, x, y, text, action=None, size=font_size, color=None):
+        if color is None:
+            color = self.font_color
         text_surf, text_rect = text_objects(text, size, color=color)
         text_rect.x, text_rect.y = x, y
         text_rect = get_outline(text_rect, outline=self.outline)
