@@ -51,10 +51,6 @@ class Menu:
         self.buttons.append(element)
 
     def auto_layout(self, display, axis="horizontal"):
-        # 1. get biggest width element
-        # 2. impose width on all element
-        # 3. x = display.w / nb element - rect.w
-        
         max_width = 0
         for button in self.buttons:
             if button[2].w > max_width:
