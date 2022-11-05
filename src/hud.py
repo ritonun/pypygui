@@ -3,6 +3,17 @@ from .var import m5x7, WHITE, BLACK
 
 
 def text_objects(text, size, color=WHITE):
+    """Create obj
+    
+    Args:
+        text (str): text string
+        size (int): font size
+        color (tuple, optional): text color, default is WHITE
+    
+    Returns:
+        pygame.surface: with a text
+        pygame.rect: rect
+    """
     font = pygame.font.Font(m5x7, size)
     text_surf = font.render(str(text), False, color)
     text_rect = text_surf.get_rect()
