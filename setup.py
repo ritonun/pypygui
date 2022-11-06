@@ -17,7 +17,7 @@ setup(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Games/Entertainment"
     ],
     keywords="pygame, gui, hud, menu, label, button",
