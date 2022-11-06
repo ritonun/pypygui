@@ -4,6 +4,7 @@ PyPyGui
 PyPyGui is a GUI/HUD library for pygame.
 
 ## WIP
+feat: slider
 
 ## v0.2.0
 Focus on gui element:
