@@ -8,6 +8,8 @@ Welcome to PyPyGUI's documentation!
 
 .. automodule:: src.hud
    :members:
+.. automodule:: src.menu
+   :members:
 
 .. toctree::
    :maxdepth: 2
