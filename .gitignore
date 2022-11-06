@@ -16,3 +16,4 @@ __pycache__/
 tests.py
 docs/dev/
 docs/test/
+tests/
