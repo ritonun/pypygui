@@ -7,17 +7,6 @@ import pygame
 class Menu:
 
     """Simplify the creation of menu. Posses color template & auto layout.
-    
-    Attributes:
-        background_color (tuple): Description
-        buttons (list): Description
-        font_color (TYPE): Description
-        font_size (int): Description
-        labels (list): Description
-        outline (int): Description
-        outline_color (tuple): Description
-        run (bool): Description
-        screen_color (tuple): Description
     """
     
     font_size = 45
