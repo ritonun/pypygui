@@ -4,7 +4,7 @@ PyPyGui
 PyPyGui is a GUI/HUD library for pygame.
 
 ## WIP
-bug: outline is buggy when changed (does not modify outline but only background rect size)
+
 
 ## v0.1.0
 - [x] Label  

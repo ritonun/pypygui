@@ -52,7 +52,7 @@ def get_outline(rect, outline):
     
     Args:
         rect (pygame.Rect): Base rect
-        outline (TYPE): Factor of diminution/augmentation of the rect size
+        outline (int): Factor of diminution/augmentation of the rect size
     
     Returns:
         pygame.Rect: New rect outlined
@@ -81,7 +81,8 @@ def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK, backgr
     # outline
     pygame.draw.rect(display, outline_color, rect, outline)
     # text
-    text_pos = [pos[0] + outline + (rect.w / 2) - (surf.get_rect().w / 2), pos[1]]
+    text_pos = [pos[0] + outline + ((rect.w - (outline * 2) - surf.get_rect().w) / 2), 
+                pos[1] + outline]
     draw_text_objects(display, text_pos, surf)
     
 
