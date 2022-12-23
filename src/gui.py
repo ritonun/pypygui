@@ -20,25 +20,23 @@ class Gui:
 
         for key in self.labels:
             label = self.labels[key]
-            size = int(label["size_ratio"] * w)
+            size = int(label["size_ratio"] * h)
             pos = (int(label["pos_ratio"][0] * w), int(label["pos_ratio"][1] * h))
 
             text_surf, text_rect = text_objects(label["text"], size, color=label["color"])
             self.labels[key]["surface"] = text_surf
             self.labels[key]["pos"] = pos
-            print(key, size)
 
     def label(self, name, pos, text, size, color=BLACK, center=False):
         if name in self.labels:
             raise KeyError("Label name '{}' already in use.".format(name))
 
-        # calculate size ratio
-        size_ratio: float = size / self.display.get_height()
-        pos_ratio = (float(pos[0] / self.display.get_width()), float(pos[1] / self.display.get_height()))
+        size_ratio = float(size / self.display.get_height())
+        pos_ratio = (float(pos[0] / self.display.get_width()),
+                     float(pos[1] / self.display.get_height()))
         text_surf, text_rect = text_objects(text, size, color=color)
         self.labels[name] = {"surface": text_surf, "pos": pos, "pos_ratio": pos_ratio, "text": text,
                              "size_ratio": size_ratio, "color": color}
-        print(name, size)
 
     def update(self):
         pass
