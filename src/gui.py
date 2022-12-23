@@ -42,6 +42,11 @@ class Gui:
         pos_ratio = (float(pos[0] / self.display.get_width()),
                      float(pos[1] / self.display.get_height()))
         text_surf, text_rect = text_objects(text, size, color=color)
+        if center:
+            pos = self.center_surface(text_surf, pos)
+            pos_ratio = (float(pos[0] / self.display.get_width()),
+                         float(pos[1] / self.display.get_height()))
+
         self.labels[name] = {"surface": text_surf, "pos": pos, "pos_ratio": pos_ratio, "text": text,
                              "size_ratio": size_ratio, "color": color}
 
