@@ -27,6 +27,13 @@ class Gui:
             self.labels[key]["surface"] = text_surf
             self.labels[key]["pos"] = pos
 
+    def label_update_text(self, label_name, text):
+        label = self.labels[label_name]
+        text_surf, text_rect = text_objects(text, int(label["size_ratio"] * self.display.get_height()),
+                                            color=label["color"])
+        self.labels[label_name]["text"] = text
+        self.labels[label_name]["surface"] = text_surf
+
     def label(self, name, pos, text, size, color=BLACK, center=False):
         if name in self.labels:
             raise KeyError("Label name '{}' already in use.".format(name))

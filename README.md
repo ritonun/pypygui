@@ -25,6 +25,7 @@ Focus on gui element:
 - [ ] Class to handle all elements
 - [ ] auto-resize all elements
 - [ ] No blurry/unclear text -> always scaled up to screen
+- [ ] fonts selector
 
 ## v0.1.0
 - [x] Label  
