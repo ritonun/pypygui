@@ -4,15 +4,22 @@ PyPyGui
 PyPyGui is a GUI/HUD library for pygame.
 
 ## WIP
+current work: slider
 feat: slider
+	-> add text of present value
+	-> show when active
+	-> more customisation
+feat: input
+	- display current value
+	- show when active
 
 ## v0.2.0
 Focus on gui element:
-- [ ] slider
+- [x] slider
+- [ ] integration of all gui element in Menu()
 - [ ] input
 - [ ] checkbox
 - [ ] varrying between different option with arrow
-- [ ] integration of all gui element in Menu()
 
 ## v0.1.0
 - [x] Label  

@@ -1,14 +1,13 @@
-from .var import BLACK, WHITE, templates
+from .var import WHITE, templates
 from .gui import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
 import sys
 import pygame
 
 
 class Menu:
-
     """Simplify the creation of menu. Posses color template & auto layout.
     """
-    
+
     font_size = 45
     outline = 1
     outline_color = (121, 85, 74)
@@ -32,7 +31,7 @@ class Menu:
 
     def template(self, template_key):
         """Update the menu coloring to a templates.
-        
+
         Args:
             template_key (str): Different coloring options. "vaporwave", "default", "vibrant". They're all equally ugly.
         """
@@ -43,7 +42,7 @@ class Menu:
 
     def add_label(self, x, y, text, size=font_size, color=None):
         """Summary
-        
+
         Args:
             x (int): x coordinate
             y (int): y coordinate
@@ -61,14 +60,14 @@ class Menu:
 
     def add_button(self, x, y, text, action=None, size=font_size, color=None):
         """Add a button to the menu
-        
+
         Args:
             x (int): x coordinate
             y (int): y coordinate
             text (str): text string
             action (None, optional): Function to do when button is clicked. Default is None.
             size (int, optional): font size
-            color (int tuple, optional): color. 
+            color (int tuple, optional): color.
         """
         if color is None:
             color = self.font_color
@@ -80,7 +79,7 @@ class Menu:
 
     def auto_layout(self, display, axis="horizontal"):
         """Automatically adjust x & y coordinate of all button to space them on the screen.
-        
+
         Args:
             display (pygame.Surface): Surface to draw on. x & y coordinate are calculated based on its size.
             axis (str, optional): Ether "horizontal" or "vertical". Choose wether button are put on x-axis or y-axis.
@@ -134,12 +133,12 @@ class Menu:
 
         if len(self.buttons) > 0:
             for element in self.buttons:
-                draw_button(display, element[0], element[1], element[2], outline=self.outline, 
+                draw_button(display, element[0], element[1], element[2], outline=self.outline,
                             outline_color=self.outline_color, background_color=self.background_color)
 
     def mainloop(self, display, fps=15):
         """Create a loop for the menu. Handle event, update & rendering
-        
+
         Args:
             display (pygame.Surface): Surface to draw on
             fps (int, optional): FPS, default is 15
@@ -151,7 +150,7 @@ class Menu:
                     pygame.quit()
                     sys.exit(0)
             display.fill(WHITE)
-            
+
             pos = pygame.mouse.get_pos()
             self.update(pos)
             self.draw(display)

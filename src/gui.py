@@ -4,12 +4,12 @@ from .var import m5x7, WHITE, BLACK
 
 def text_objects(text, size, color=WHITE):
     """Create obj
-    
+
     Args:
         text (str): text string
         size (int): font size
         color (tuple, optional): text color, default is WHITE
-    
+
     Returns:
         pygame.surface: containt the text & font
         pygame.rect: rect of surface size
@@ -22,7 +22,7 @@ def text_objects(text, size, color=WHITE):
 
 def draw_text_objects(display, pos, surf):
     """Draw a text object
-    
+
     Args:
         display (pygame.Surface): Surface to draw on
         pos (int tuple): Position to draw text
@@ -33,11 +33,11 @@ def draw_text_objects(display, pos, surf):
 
 def button_is_active(rect, pos):
     """Check if the mouse is hovering on the button
-    
+
     Args:
         rect (pygame.Rect): button rect
         pos (int tuple): mouse coordinate
-    
+
     Returns:
         bool: True if mouse is hovering on the button
     """
@@ -49,11 +49,11 @@ def button_is_active(rect, pos):
 
 def get_outline(rect, outline):
     """Create a new bigger/smaller rect base on a rect. The two rects share the same center.
-    
+
     Args:
         rect (pygame.Rect): Base rect
         outline (int): Factor of diminution/augmentation of the rect size
-    
+
     Returns:
         pygame.Rect: New rect outlined
     """
@@ -66,7 +66,7 @@ def get_outline(rect, outline):
 
 def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK, background_color=WHITE):
     """Summary
-    
+
     Args:
         display (pygame.Surface): Surface to draw on
         pos (int tuple): Coordinate of the button
@@ -81,14 +81,14 @@ def draw_button(display, pos, surf, rect, outline=1, outline_color=BLACK, backgr
     # outline
     pygame.draw.rect(display, outline_color, rect, outline)
     # text
-    text_pos = [pos[0] + outline + ((rect.w - (outline * 2) - surf.get_rect().w) / 2), 
+    text_pos = [pos[0] + outline + ((rect.w - (outline * 2) - surf.get_rect().w) / 2),
                 pos[1] + outline]
     draw_text_objects(display, text_pos, surf)
-    
+
 
 def label(display, x, y, text, size, color=WHITE):
     """Display a string of text
-    
+
     Args:
         display (pygame.Surface): Surface to draw on
         x (int): x coordinate
@@ -103,7 +103,7 @@ def label(display, x, y, text, size, color=WHITE):
 
 def button(display, x, y, text, size, pos, action=None, font_color=WHITE, outline_color=BLACK, outline=3):
     """Display a button
-    
+
     Args:
         display (pygame.Surface): Surface to draw on
         x (int): x coordinate
@@ -124,7 +124,7 @@ def button(display, x, y, text, size, pos, action=None, font_color=WHITE, outlin
     text_rect.h += 2 * outline
 
     if button_is_active(text_rect, pos) and action is not None:
-        action() 
+        action()
 
     display.blit(text_surf, (x, y))
     pygame.draw.rect(display, outline_color, text_rect, outline)

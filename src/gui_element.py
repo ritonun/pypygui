@@ -1,36 +1,5 @@
 import pygame
-from .var import RED, GREEN, BLACK, WHITE
-
-def slider(display, x, y, w, pos, val_min=0, val_max=100):
-    pos = list(pos)
-    circle_radius = 10
-    circle_outline = 1
-    circle_rect = pygame.Rect(pos[0] - circle_radius, y - circle_radius, 2 * circle_radius, 2 * circle_radius)
-    x_min = x
-    x_max = x + w
-    h = 1
-    outline = 1
-    
-    pos[1] = y
-    if pos[0] < x_min:
-        pos[0] = x_min
-    elif pos[0] > x_max:
-        pos[0] = x_max
-
-    a = (val_max - val_min) / (x_max - x_min)
-    b = a * x_min
-
-    valeur = a * pos[0] - b
-
-    pygame.draw.rect(display, BLACK, (x - outline, y - outline, w + 2 * outline, h + 2 * outline), 1)
-    pygame.draw.circle(display, WHITE, pos, circle_radius)
-    pygame.draw.circle(display, BLACK, pos, circle_radius, circle_outline)
-    pygame.draw.rect(display, GREEN, circle_rect, 1)
-
-    if not circle_rect.collidepoint(pos):
-        return val_min
-
-    return valeur
+from .var import BLACK
 
 
 class Slider:
