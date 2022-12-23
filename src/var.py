@@ -8,6 +8,7 @@ BLUE = (0, 0, 255)
 
 m5x7 = "res/fonts/m5x7.ttf"
 
+# TEMPLATES
 templates = {
     "vaporwave": {
         "font_color": WHITE,

@@ -13,13 +13,18 @@ feat: input
 	- display current value
 	- show when active
 
-## v0.2.0
+## v0.3.0
 Focus on gui element:
 - [x] slider
 - [ ] integration of all gui element in Menu()
 - [ ] input
 - [ ] checkbox
 - [ ] varrying between different option with arrow
+
+## v0.2.0
+- [ ] Class to handle all elements
+- [ ] auto-resize all elements
+- [ ] No blurry/unclear text -> always scaled up to screen
 
 ## v0.1.0
 - [x] Label  

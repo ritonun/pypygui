@@ -1,5 +1,5 @@
 from .var import WHITE, templates
-from .gui import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
+from .gui_basic import text_objects, draw_text_objects, draw_button, get_outline, button_is_active
 import sys
 import pygame
 

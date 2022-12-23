@@ -1,11 +1,12 @@
-import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
-import pygame
+import os  # noqa
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"  # noqa
+import pygame  # noqa
 
-from .gui import *
-from .gui_element import *
-from .var import *
-from .menu import Menu
+from .gui import *  # noqa
+from .gui_element import *  # noqa
+from .var import *  # noqa
+from .menu import Menu  # noqa
+from .gui_basic import *  # noqa
 
 pygame.init()
 pygame.font.init()
