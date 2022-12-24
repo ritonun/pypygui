@@ -56,7 +56,7 @@ class ButtonLabel:
         self.is_active = False
         self.action = action
 
-    def resize(self):
+    def resize(self, new_display):
         self.rect = self.label.rect
         self.rect.x = self.label.pos[0]
         self.rect.y = self.label.pos[1]
@@ -71,6 +71,60 @@ class ButtonLabel:
 
     def draw(self):
         pygame.draw.rect(self.label.display, BLACK, self.rect, 1)
+
+
+class ButtonRect:
+    def __init__(self, rect, display, action=None):
+        self.rect = rect
+        self.action = action
+        self.display = display
+
+        w, h = self.display.get_size()
+        self.rect_ratio = (self.rect.x / w, self.rect.y / h, self.rect.w / w, self.rect.h / h)
+
+    def resize(self, new_display):
+        self.display = new_display
+        w, h = self.display.get_size()
+
+        self.rect = pygame.Rect(int(self.rect_ratio[0] * w), int(self.rect_ratio[1] * h),
+                                int(self.rect_ratio[2] * w), int(self.rect_ratio[3] * h))
+
+    def update(self, mouse_pos):
+        if rect_is_clicked(self.rect, mouse_pos):
+            self.is_active = True
+            if self.action is not None:
+                self.action()
+        else:
+            self.is_active = False
+
+    def draw(self):
+        pygame.draw.rect(self.display, BLACK, self.rect, 1)
+
+
+class ButtonImage:
+    def __init__(self, img, pos, display, resize=1, action=None):
+        self.img = img
+        self.pos = pos
+        self.rect = img.get_rect()
+        self.rect.x = pos[0]
+        self.rect.y = pos[1]
+
+        self.action = action
+        self.is_active = False
+
+    def resize(self, new_display):
+        pass
+
+    def update(self, mouse_pos):
+        if rect_is_clicked(self.rect, mouse_pos):
+            self.is_active = True
+            if self.action is not None:
+                self.action()
+        else:
+            self.is_active = False
+
+    def draw(self):
+        pass
 
 
 class Slider:
