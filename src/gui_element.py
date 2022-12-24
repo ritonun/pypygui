@@ -1,5 +1,5 @@
 import pygame
-from .gui_basic import center_surface, text_objects
+from .gui_basic import center_surface, text_objects, rect_is_clicked
 from .var import BLACK, m5x7
 
 
@@ -46,36 +46,23 @@ class Label:
         self.display.blit(self.surf, self.pos)
 
 
-class Button:
-    def __init__(self, rect, pos, display, action=None):
-        self.rect = rect
-        self.rect.x = pos[0]
-        self.rect.y = pos[1]
-        self.display = display
-        self.action = action
-
-        w, h = self.display.get_size()
-        self.rect_ratio = (self.rect.x / w, self.rect.y / h, self.rect.w / w, self.rect.h / h)
+class ButtonLabel:
+    def __init__(self, label, action=None):
+        self.label = label
+        self.rect = self.label.rect
+        self.rect.x = self.label.pos[0]
+        self.rect.y = self.label.pos[1]
 
         self.is_active = False
+        self.action = action
 
-    def resize(self, new_display):
-        self.display = new_display
-        w, h = self.display.get_size()
-
-        self.rect.x = self.rect_ratio[0] * w
-        self.rect.y = self.rect_ratio[1] * h
-        self.rect.w = self.rect_ratio[2] * w
-        self.rect.h = self.rect_ratio[3] * h
-
-    def clicked(self, mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0]:
-                return True
-        return False
+    def resize(self):
+        self.rect = self.label.rect
+        self.rect.x = self.label.pos[0]
+        self.rect.y = self.label.pos[1]
 
     def update(self, mouse_pos):
-        if self.clicked(mouse_pos):
+        if rect_is_clicked(self.rect, mouse_pos):
             self.is_active = True
             if self.action is not None:
                 self.action()
@@ -83,7 +70,7 @@ class Button:
             self.is_active = False
 
     def draw(self):
-        pygame.draw.rect(self.display, BLACK, self.rect, 1)
+        pygame.draw.rect(self.label.display, BLACK, self.rect, 1)
 
 
 class Slider:

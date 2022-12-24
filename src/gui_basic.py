@@ -2,6 +2,13 @@ import pygame
 from .var import m5x7, WHITE, BLACK
 
 
+def rect_is_clicked(rect, mouse_pos):
+    if rect.collidepoint(mouse_pos):
+        if pygame.mouse.get_pressed()[0]:
+            return True
+    return False
+
+
 def key_in_dict(key, checked_dict):
     if key in checked_dict:
         return True

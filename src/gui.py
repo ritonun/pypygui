@@ -1,5 +1,5 @@
 import pygame
-from .gui_element import Label, Button
+from .gui_element import Label, ButtonLabel
 from .gui_basic import key_in_dict
 from .var import BLACK, m5x7
 
@@ -18,7 +18,7 @@ class Gui:
             self.labels[label].resize(self.display)
 
         for button in self.buttons:
-            self.buttons[button].resize(self.display)
+            self.buttons[button].resize()
 
     def create_button_from_label(self, button_name, label_name, action=None):
         if not key_in_dict(label_name, self.labels):
@@ -27,10 +27,7 @@ class Gui:
             raise KeyError("Button name {} already attributed.".format(label_name))
 
         label = self.labels[label_name]
-        self.buttons[button_name] = Button(label.rect, label.pos, self.display, action=action)
-
-    def button(self):
-        pass
+        self.buttons[button_name] = ButtonLabel(label, action=action)
 
     def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
         if key_in_dict(name, self.labels):
