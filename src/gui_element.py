@@ -1,5 +1,49 @@
 import pygame
-from .var import BLACK
+from .gui_basic import center_surface, text_objects
+from .var import BLACK, m5x7
+
+
+class Label:
+    def __init__(self, pos, text, size, display, color=BLACK, fonts=m5x7, center=False):
+        self.display = display
+        w, h = self.display.get_size()
+
+        self.text = text
+        self.size_ratio = size / h
+        self.color = color
+        self.fonts = fonts
+        self.center = center
+        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+
+        if self.center:
+            self.pos = center_surface(self.surf, pos)
+            self.pos_ratio = (pos[0] / w, pos[1] / h)
+        else:
+            self.pos = pos
+            self.pos_ratio = (pos[0] / w, pos[1] / h)
+
+    def resize(self, new_display):
+        self.display = new_display
+        w, h = self.display.get_size()
+
+        size = int(self.size_ratio * h)
+        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+
+        pos = (int(self.pos_ratio[0] * w), int(self.pos_ratio[1] * h))
+        self.pos = center_surface(self.surf, pos)
+
+    def update_text(self, text):
+        self.text = text
+        size = int(self.size_ratio * self.display.get_height())
+        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+
+        if self.center:
+            w, h = self.display.get_size()
+            pos = (int(self.pos_ratio[0] * w), int(self.pos_ratio[1] * h))
+            self.pos = center_surface(self.surf, pos)
+
+    def draw(self):
+        self.display.blit(self.surf, self.pos)
 
 
 class Slider:

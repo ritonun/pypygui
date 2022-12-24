@@ -2,7 +2,23 @@ import pygame
 from .var import m5x7, WHITE, BLACK
 
 
-def text_objects(text, size, color=WHITE):
+def center_surface(surface, pos):
+    """Get pos for a surface based on the center pos
+
+    Args:
+        surface (pygame.Surface): surface to center
+        pos (int tuple): center position
+
+    Returns:
+        int tuple: top left corner pos to draw surface
+    """
+    w, h = surface.get_size()
+    x = pos[0] - int(w / 2)
+    y = pos[1] - int(h / 2)
+    return (x, y)
+
+
+def text_objects(text, size, color=WHITE, fonts=m5x7):
     """Create obj
 
     Args:
@@ -14,7 +30,7 @@ def text_objects(text, size, color=WHITE):
         pygame.surface: containt the text & font
         pygame.rect: rect of surface size
     """
-    font = pygame.font.Font(m5x7, size)
+    font = pygame.font.Font(fonts, size)
     text_surf = font.render(str(text), False, color)
     text_rect = text_surf.get_rect()
     return text_surf, text_rect
