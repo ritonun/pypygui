@@ -4,8 +4,9 @@ from .var import BLACK, m5x7
 
 
 class Gui:
-    def __init__(self, display_size):
+    def __init__(self, display_size, font_path=m5x7):
         self.display = pygame.Surface(display_size, pygame.SRCALPHA)
+        self.font_path = font_path
         self.labels = {}
 
     def resize(self, new_display_size):
@@ -14,9 +15,12 @@ class Gui:
         for label in self.labels:
             self.labels[label].resize(self.display)
 
-    def label(self, name, pos, text, size, color=BLACK, fonts=m5x7, center=False):
+    def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
         if name in self.labels:
             raise KeyError("Label name '{}' already in use.".format(name))
+
+        if fonts is None:
+            fonts = self.font_path
 
         label = Label(pos, text, size, self.display, color=color, fonts=fonts, center=center)
         self.labels[name] = label
