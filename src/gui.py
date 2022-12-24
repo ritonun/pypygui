@@ -1,5 +1,6 @@
 import pygame
 from .gui_element import Label, Button
+from .gui_basic import key_in_dict
 from .var import BLACK, m5x7
 
 
@@ -10,12 +11,6 @@ class Gui:
         self.labels = {}
         self.buttons = {}
 
-    def key_in_use(self, key):
-        if key in self.labels:
-            raise KeyError("Label key '{}' already in use.".format(key))
-        if key in self.buttons:
-            raise KeyError("Buttons key '{}' already in use.".format(key))
-
     def resize(self, new_display_size):
         self.display = pygame.Surface(new_display_size, pygame.SRCALPHA)
 
@@ -25,18 +20,21 @@ class Gui:
         for button in self.buttons:
             self.buttons[button].resize(self.display)
 
-    def button(self, name, pos, text, size, color=BLACK, fonts=None, center=False, action=None):
-        self.key_in_use(name)
+    def create_button_from_label(self, button_name, label_name, action=None):
+        if not key_in_dict(label_name, self.labels):
+            raise KeyError("Label name {} not attributed.".format(label_name))
+        if key_in_dict(button_name, self.buttons):
+            raise KeyError("Button name {} already attributed.".format(label_name))
 
-        if fonts is None:
-            fonts = self.font_path
+        label = self.labels[label_name]
+        self.buttons[button_name] = Button(label.rect, label.pos, self.display, action=action)
 
-        button = Button(pos, text, size, self.display, color=color, fonts=fonts, center=center,
-                        action=action)
-        self.buttons[name] = button
+    def button(self):
+        pass
 
     def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
-        self.key_in_use(name)
+        if key_in_dict(name, self.labels):
+            raise KeyError("Label name {} already attributed.".format(name))
 
         if fonts is None:
             fonts = self.font_path

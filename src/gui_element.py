@@ -46,18 +46,27 @@ class Label:
         self.display.blit(self.surf, self.pos)
 
 
-class Button(Label):
-    def __init__(self, pos, text, size, display, color=BLACK, fonts=m5x7, center=False, action=None):
-        super().__init__(pos, text, size, display, color=color, fonts=fonts, center=center)
+class Button:
+    def __init__(self, rect, pos, display, action=None):
+        self.rect = rect
+        self.rect.x = pos[0]
+        self.rect.y = pos[1]
+        self.display = display
         self.action = action
-        self.rect.x = self.pos[0]
-        self.rect.y = self.pos[1]
+
+        w, h = self.display.get_size()
+        self.rect_ratio = (self.rect.x / w, self.rect.y / h, self.rect.w / w, self.rect.h / h)
+
         self.is_active = False
 
     def resize(self, new_display):
-        super().resize(new_display)
-        self.rect.x = self.pos[0]
-        self.rect.y = self.pos[1]
+        self.display = new_display
+        w, h = self.display.get_size()
+
+        self.rect.x = self.rect_ratio[0] * w
+        self.rect.y = self.rect_ratio[1] * h
+        self.rect.w = self.rect_ratio[2] * w
+        self.rect.h = self.rect_ratio[3] * h
 
     def clicked(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos):
@@ -74,8 +83,7 @@ class Button(Label):
             self.is_active = False
 
     def draw(self):
-        pygame.draw.rect(self.display, self.color, self.rect, 1)
-        super().draw()
+        pygame.draw.rect(self.display, BLACK, self.rect, 1)
 
 
 class Slider:

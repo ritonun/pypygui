@@ -2,6 +2,13 @@ import pygame
 from .var import m5x7, WHITE, BLACK
 
 
+def key_in_dict(key, checked_dict):
+    if key in checked_dict:
+        return True
+    else:
+        return False
+
+
 def center_surface(surface, pos):
     """Get pos for a surface based on the center pos
 
