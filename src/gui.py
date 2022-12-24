@@ -1,5 +1,5 @@
 import pygame
-from .gui_element import Label, ButtonLabel, ButtonRect
+from .gui_element import Label, ButtonLabel, ButtonRect, ButtonImage
 from .gui_basic import key_in_dict
 from .var import BLACK, m5x7
 
@@ -34,6 +34,12 @@ class Gui:
             raise KeyError("Button name {} already attributed.".format(button_name))
 
         self.buttons[button_name] = ButtonRect(rect, self.display, action=action)
+
+    def create_button_from_image(self, button_name, img, pos, display, resize=1, action=None):
+        if key_in_dict(button_name, self.buttons):
+            raise KeyError("Button name {} already attributed.".format(button_name))
+
+        self.buttons[button_name] = ButtonImage(img, pos, display, resize=resize, action=action)
 
     def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
         if key_in_dict(name, self.labels):
