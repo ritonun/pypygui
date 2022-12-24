@@ -1,5 +1,5 @@
 import pygame
-from .gui_element import Label
+from .gui_element import Label, Button
 from .var import BLACK, m5x7
 
 
@@ -8,6 +8,13 @@ class Gui:
         self.display = pygame.Surface(display_size, pygame.SRCALPHA)
         self.font_path = font_path
         self.labels = {}
+        self.buttons = {}
+
+    def key_in_use(self, key):
+        if key in self.labels:
+            raise KeyError("Label key '{}' already in use.".format(key))
+        if key in self.buttons:
+            raise KeyError("Buttons key '{}' already in use.".format(key))
 
     def resize(self, new_display_size):
         self.display = pygame.Surface(new_display_size, pygame.SRCALPHA)
@@ -15,9 +22,21 @@ class Gui:
         for label in self.labels:
             self.labels[label].resize(self.display)
 
+        for button in self.buttons:
+            self.buttons[button].resize(self.display)
+
+    def button(self, name, pos, text, size, color=BLACK, fonts=None, center=False, action=None):
+        self.key_in_use(name)
+
+        if fonts is None:
+            fonts = self.font_path
+
+        button = Button(pos, text, size, self.display, color=color, fonts=fonts, center=center,
+                        action=action)
+        self.buttons[name] = button
+
     def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
-        if name in self.labels:
-            raise KeyError("Label name '{}' already in use.".format(name))
+        self.key_in_use(name)
 
         if fonts is None:
             fonts = self.font_path
@@ -29,11 +48,16 @@ class Gui:
         self.labels[label_name].update_text(text)
 
     def update(self):
-        pass
+        mouse_pos = pygame.mouse.get_pos()
+        for button in self.buttons:
+            self.buttons[button].update(mouse_pos)
 
     def draw(self, display):
         self.display.fill((0, 0, 0, 0))
         for key in self.labels:
             self.labels[key].draw()
+
+        for key in self.buttons:
+            self.buttons[key].draw()
 
         display.blit(self.display, (0, 0))

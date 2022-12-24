@@ -13,7 +13,7 @@ class Label:
         self.color = color
         self.fonts = fonts
         self.center = center
-        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+        self.surf, self.rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
 
         if self.center:
             self.pos = center_surface(self.surf, pos)
@@ -27,7 +27,7 @@ class Label:
         w, h = self.display.get_size()
 
         size = int(self.size_ratio * h)
-        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+        self.surf, self.rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
 
         pos = (int(self.pos_ratio[0] * w), int(self.pos_ratio[1] * h))
         self.pos = center_surface(self.surf, pos)
@@ -35,7 +35,7 @@ class Label:
     def update_text(self, text):
         self.text = text
         size = int(self.size_ratio * self.display.get_height())
-        self.surf, rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
+        self.surf, self.rect = text_objects(self.text, size, color=self.color, fonts=self.fonts)
 
         if self.center:
             w, h = self.display.get_size()
@@ -44,6 +44,34 @@ class Label:
 
     def draw(self):
         self.display.blit(self.surf, self.pos)
+
+
+class Button(Label):
+    def __init__(self, pos, text, size, display, color=BLACK, fonts=m5x7, center=False, action=None):
+        super().__init__(pos, text, size, display, color=color, fonts=fonts, center=center)
+        self.action = action
+        self.rect.x = self.pos[0]
+        self.rect.y = self.pos[1]
+
+    def resize(self, new_display):
+        super().resize(new_display)
+        self.rect.x = self.pos[0]
+        self.rect.y = self.pos[1]
+
+    def clicked(self, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            if pygame.mouse.get_pressed()[0]:
+                return True
+        return False
+
+    def update(self, mouse_pos):
+        if self.clicked(mouse_pos):
+            if self.action is not None:
+                print('click')
+
+    def draw(self):
+        pygame.draw.rect(self.display, self.color, self.rect, 1)
+        super().draw()
 
 
 class Slider:
