@@ -52,6 +52,7 @@ class Button(Label):
         self.action = action
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
+        self.is_active = False
 
     def resize(self, new_display):
         super().resize(new_display)
@@ -66,8 +67,11 @@ class Button(Label):
 
     def update(self, mouse_pos):
         if self.clicked(mouse_pos):
+            self.is_active = True
             if self.action is not None:
-                print('click')
+                self.action()
+        else:
+            self.is_active = False
 
     def draw(self):
         pygame.draw.rect(self.display, self.color, self.rect, 1)
