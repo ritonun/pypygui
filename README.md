@@ -14,7 +14,7 @@ feat: input
 	- show when active
 
 ## v0.3.0
-Focus on gui element:
+Focus on gui element:  
 - [x] slider
 - [ ] integration of all gui element in Menu()
 - [ ] input
@@ -22,10 +22,16 @@ Focus on gui element:
 - [ ] varrying between different option with arrow
 
 ## v0.2.0
-- [ ] Class to handle all elements
+- [x] Gui global class to handle all gui elements
+- [x] label class
+- [ ] button class (clickable)
+- [ ] button properties (all resizable)
+	- [ ] outline
+	- [ ] image based
+	- [ ] text
 - [ ] auto-resize all elements
-- [ ] No blurry/unclear text -> always scaled up to screen
-- [ ] fonts selector
+- [x] No blurry/unclear text -> always scaled up to screen
+- [x] fonts selector
 
 ## v0.1.0
 - [x] Label  
