@@ -6,7 +6,7 @@
 Welcome to PyPyGUI's documentation!
 ===================================
 
-.. automodule:: src.gui
+.. automodule:: src.gui_basic
    :members:
 .. automodule:: src.menu
    :members:
