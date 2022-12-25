@@ -22,6 +22,8 @@ class Label:
             self.pos = pos
             self.pos_ratio = (pos[0] / w, pos[1] / h)
 
+        self.need_resize = False
+
     def resize(self, new_display):
         self.display = new_display
         w, h = self.display.get_size()
@@ -41,6 +43,7 @@ class Label:
             w, h = self.display.get_size()
             pos = (int(self.pos_ratio[0] * w), int(self.pos_ratio[1] * h))
             self.pos = center_surface(self.surf, pos)
+        self.need_resize = True
 
     def draw(self):
         self.display.blit(self.surf, self.pos)
@@ -68,6 +71,10 @@ class ButtonLabel:
                 self.action()
         else:
             self.is_active = False
+
+        if self.label.need_resize is True:
+            self.resize(self.label.display)
+            self.label.need_resize = False
 
     def draw(self):
         pygame.draw.rect(self.label.display, BLACK, self.rect, 1)
