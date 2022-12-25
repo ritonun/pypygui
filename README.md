@@ -5,7 +5,7 @@ PyPyGui is a GUI library for pygame. It is made to easily handle all gui element
 
 ## ToDo
 ### WIP
-current work: refactor menu to use new class for label, button, etc...
+current work: outline properties & implementation of propetires in Button() class
 1. refactor button class with inheritance
 2. add properties to button with outline
 3. add other properties
@@ -22,7 +22,7 @@ Focus on gui element:
 - [ ] refactor menu to use new class for label, button, etc...
 
 ### v0.3.0
-- [ ] refactor Button Class with inheritance
+- [x] refactor Button Class with inheritance
 - [ ] add properties to all Gui element
 	- [ ] outline
 	- [ ] background color

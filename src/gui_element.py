@@ -3,6 +3,18 @@ from .gui_basic import center_surface, center_rect, text_objects, rect_is_clicke
 from .var import BLACK, RED, m5x7
 
 
+class Outline:
+    def __init__(self, rect, display):
+        self.rect = rect
+        self.display = display
+
+    def resize(self):
+        pass
+
+    def draw(self):
+        pass
+
+
 class Label:
     def __init__(self, pos, text, size, display, color=BLACK, fonts=m5x7, center=False):
         self.display = display
