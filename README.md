@@ -25,8 +25,9 @@ Focus on gui element:
 - [ ] button class (clickable)
 - [ ] button properties (all resizable)
 	- [ ] outline
-	- [ ] image based
-	- [ ] text
+	- [x] image based
+	- [x] text
+	- [x] rect
 - [ ] auto-resize all elements
 - [x] No blurry/unclear text -> always scaled up to screen
 - [x] fonts selector

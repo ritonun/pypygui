@@ -102,7 +102,7 @@ class ButtonRect:
 
 
 class ButtonImage:
-    def __init__(self, img, pos, display, resize=1, action=None):
+    def __init__(self, img, pos, display, resize_img=1, action=None):
         self.display = display
         self.img_original = img
         self.img = img
@@ -111,7 +111,7 @@ class ButtonImage:
         self.rect = img.get_rect()
         self.rect.x = pos[0]
         self.rect.y = pos[1]
-        self.resize = resize
+        self.resize_img = resize_img
         self.resize_ratio = self.img.get_width() / self.display.get_width()
         self.image_ratio = self.img.get_width() / self.img.get_height()
 
