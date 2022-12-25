@@ -89,7 +89,6 @@ class Gui:
 
         Raises:
             KeyError: Description
-            KeyError
         """
         if key_in_dict(button_name, self.buttons):
             raise KeyError("Button name {} already attributed.".format(button_name))
