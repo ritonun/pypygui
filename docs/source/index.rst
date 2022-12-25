@@ -6,9 +6,11 @@
 Welcome to PyPyGUI's documentation!
 ===================================
 
-.. automodule:: src.gui_basic
+.. automodule:: src.gui
    :members:
 .. automodule:: src.menu
+   :members:
+.. automodule:: src.gui_basic
    :members:
 
 .. toctree::

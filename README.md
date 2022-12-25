@@ -22,13 +22,13 @@ Focus on gui element:
 ## v0.2.0
 - [x] Gui global class to handle all gui elements
 - [x] label class
-- [ ] button class (clickable)
-- [ ] button properties (all resizable)
+- [x] button class (clickable)
+- [x] button properties (all resizable)
 	- [ ] outline
 	- [x] image based
 	- [x] text
 	- [x] rect
-- [ ] auto-resize all elements
+- [x] auto-resize all elements
 - [x] No blurry/unclear text -> always scaled up to screen
 - [x] fonts selector
 
