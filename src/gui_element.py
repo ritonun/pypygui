@@ -1,5 +1,5 @@
 import pygame
-from .gui_basic import center_surface, text_objects, rect_is_clicked
+from .gui_basic import center_surface, center_rect, text_objects, rect_is_clicked
 from .var import BLACK, RED, m5x7
 
 
@@ -111,47 +111,49 @@ class ButtonRect(Button):
     def update(self, mouse_pos):
         super().check_is_active(mouse_pos)
 
+    def draw(self):
+        pygame.draw.rect(self.display, BLACK, self.rect, 1)
 
-class ButtonImage:
-    def __init__(self, img, pos, display, resize_img=1, action=None):
-        self.display = display
+
+class ButtonImage(Button):
+    def __init__(self, img, pos, display, resize_img=1, action=None, center=False):
         self.img_original = img
         self.img = img
+
+        self.center = center
+
+        rect = self.img.get_rect()
+        super().__init__(rect, display, action=action)
         self.pos = pos
+        if self.center:
+            self.rect.x, self.rect.y = center_rect(rect, pos)
+        else:
+            self.rect.x, self.rect.y = self.pos
+
         self.pos_ratio = (self.pos[0] / self.display.get_width(), self.pos[1] / self.display.get_height())
-        self.rect = img.get_rect()
-        self.rect.x = pos[0]
-        self.rect.y = pos[1]
+
         self.resize_img = resize_img
         self.resize_ratio = self.img.get_width() / self.display.get_width()
         self.image_ratio = self.img.get_width() / self.img.get_height()
 
-        self.action = action
-        self.is_active = False
-
     def resize(self, new_display):
-        self.display = new_display
-        w, h = self.display.get_size()
+        super().resize(new_display)
 
-        img = pygame.transform.scale(self.img_original, (self.resize_ratio * w,
-                                                         self.resize_ratio * w * self.image_ratio))
+        self.rect.w = self.image_ratio * self.rect.h
+        self.img = pygame.transform.scale(self.img_original, (self.rect.w, self.rect.h))
 
-        self.img = img
-        self.pos = (int(self.pos_ratio[0] * w), int(self.pos_ratio[1] * h))
-        self.rect = self.img.get_rect()
+        self.pos = (self.pos_ratio[0] * self.display.get_width(), self.pos_ratio[1] * self.display.get_height())
+        if self.center:
+            self.pos = center_rect(self.rect, self.pos)
         self.rect.x = self.pos[0]
         self.rect.y = self.pos[1]
 
     def update(self, mouse_pos):
-        if rect_is_clicked(self.rect, mouse_pos):
-            self.is_active = True
-            if self.action is not None:
-                self.action()
-        else:
-            self.is_active = False
+        super().check_is_active(mouse_pos)
 
     def draw(self):
-        self.display.blit(self.img, self.pos)
+        self.display.blit(self.img, (self.rect.x, self.rect.y))
+        super().draw()
 
 
 class Slider:

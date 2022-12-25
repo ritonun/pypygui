@@ -75,7 +75,7 @@ class Gui:
 
         self.buttons[button_name] = ButtonRect(rect, self.display, action=action)
 
-    def create_button_from_image(self, button_name, img, pos, display, resize_img=1, action=None):
+    def create_button_from_image(self, button_name, img, pos, display, resize_img=1, action=None, center=False):
         """Create a button from an image (a pygame Surface).
 
         Args:
@@ -85,14 +85,16 @@ class Gui:
             display (pygame.Surface): Surface to draw the button on
             resize_img (int, optional): Change image size by multipliyng current size by resize_img
             action (None, optional): Function to execute when the button is clicked
+            center (bool, optional): Center image around pos
 
         Raises:
+            KeyError: Description
             KeyError
         """
         if key_in_dict(button_name, self.buttons):
             raise KeyError("Button name {} already attributed.".format(button_name))
 
-        self.buttons[button_name] = ButtonImage(img, pos, display, resize_img=resize_img, action=action)
+        self.buttons[button_name] = ButtonImage(img, pos, display, resize_img=resize_img, action=action, center=center)
 
     def label(self, name, pos, text, size, color=BLACK, fonts=None, center=False):
         """Create a text label.

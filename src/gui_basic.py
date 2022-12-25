@@ -32,6 +32,13 @@ def center_surface(surface, pos):
     return (x, y)
 
 
+def center_rect(rect, pos):
+    w, h = rect.w, rect.h
+    x = pos[0] - int(w / 2)
+    y = pos[1] - int(h / 2)
+    return (x, y)
+
+
 def text_objects(text, size, color=WHITE, fonts=m5x7):
     """Create obj
 

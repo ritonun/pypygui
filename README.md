@@ -30,7 +30,7 @@ Focus on gui element:
 	- [ ] active/unactive state
 	- [ ] sound ?
 	- [ ] easy to create own properties and add to it
-- [ ] ButtonImage -> pos center option
+- [x] ButtonImage -> pos center option
 
 ### v0.2.0
 - [x] Gui global class to handle all gui elements
