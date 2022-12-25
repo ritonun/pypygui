@@ -1,9 +1,10 @@
 PyPyGui
 =============
 
-PyPyGui is a GUI/HUD library for pygame.
+PyPyGui is a GUI library for pygame. It is made to easily handle all gui elements.
 
-## WIP
+## ToDo
+### WIP
 current work: refactor class behavior  
 	-> Global GUI class  
 	-> Label class  
@@ -11,7 +12,7 @@ current work: refactor class behavior
 	-> create button from label, img, or nothing  
 	-> attribute properties to button (outline, color, behavior when clicked or not, ...)  
 
-## v0.3.0
+### v0.4.0
 Focus on gui element:  
 - [x] slider
 - [ ] integration of all gui element in Menu()
@@ -19,12 +20,21 @@ Focus on gui element:
 - [ ] checkbox
 - [ ] varrying between different option with arrow
 
-## v0.2.0
+### v0.3.0
+- [ ] refactor Button Class with inehritance
+- [ ] add properties to all Gui element
+	- [ ] outline
+	- [ ] background color
+	- [ ] animation
+	- [ ] active/unactive state
+	- [ ] sound ?
+	- [ ] easy to create own properties and add to it
+
+### v0.2.0
 - [x] Gui global class to handle all gui elements
 - [x] label class
 - [x] button class (clickable)
 - [x] button properties (all resizable)
-	- [ ] outline
 	- [x] image based
 	- [x] text
 	- [x] rect
@@ -32,7 +42,7 @@ Focus on gui element:
 - [x] No blurry/unclear text -> always scaled up to screen
 - [x] fonts selector
 
-## v0.1.0
+### v0.1.0
 - [x] Label  
 - [x] Button
 - [x] Menu (auto-layout)
@@ -40,7 +50,7 @@ Focus on gui element:
 - [x] menu self mainloop
 - [ ] nice defaults templates
 
-## Future function
+### Future function
 - [ ] Hud elements (img)
 - [ ] auto-doc with sphynx
 - [ ] select multiple font (or custom)

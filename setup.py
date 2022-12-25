@@ -6,7 +6,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pypygui",
-    version="0.2.0",
+    version="0.3.0",
     description="GUI/HUD library for pygame",
     long_description=long_description,
     long_description_content_type="text/markdown",

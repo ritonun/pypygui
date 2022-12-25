@@ -22,7 +22,7 @@ copyright = '2022, ritonun'
 author = 'ritonun'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2.0'
+release = '0.3.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -31,8 +31,8 @@ release = '0.2.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = extensions = [
-    'sphinx.ext.autodoc', 
-    'sphinx.ext.coverage', 
+    'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
     'sphinx.ext.napoleon'
 ]
 
