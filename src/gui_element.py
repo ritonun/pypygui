@@ -53,11 +53,20 @@ class Button:
     debug = True
     color = RED
 
-    def __init__(self, rect, action=None):
+    def __init__(self, rect, display, action=None):
         self.rect = rect
+        self.display = display
+        w, h = self.display.get_size()
+        self.rect_ratio = (self.rect.x / w, self.rect.y / h, self.rect.w / w, self.rect.h / h)
 
         self.action = action
         self.is_active = False
+
+    def resize(self, new_display):
+        self.display = new_display
+        w, h = self.display.get_size()
+        self.rect = pygame.Rect(int(self.rect_ratio[0] * w), int(self.rect_ratio[1] * h),
+                                int(self.rect_ratio[2] * w), int(self.rect_ratio[3] * h))
 
     def check_is_active(self, mouse_pos):
         if rect_is_clicked(self.rect, mouse_pos):
@@ -67,21 +76,22 @@ class Button:
         else:
             self.is_active = False
 
-    def draw(self, display):
+    def draw(self):
         if self.debug:
-            pygame.draw.rect(display, self.color, self.rect, 1)
+            pygame.draw.rect(self.display, self.color, self.rect, 1)
 
 
 class ButtonLabel(Button):
-    def __init__(self, label, action=None):
+    def __init__(self, label, display, action=None):
         self.label = label
 
         rect = self.label.rect
         rect.x = self.label.pos[0]
         rect.y = self.label.pos[1]
-        super().__init__(rect, action=action)
+        super().__init__(rect, display, action=action)
 
     def resize(self, new_display):
+        self.display = new_display
         self.rect = self.label.rect
         self.rect.x = self.label.pos[0]
         self.rect.y = self.label.pos[1]
@@ -93,36 +103,13 @@ class ButtonLabel(Button):
             self.resize(self.label.display)
             self.label.need_resize = False
 
-    def draw(self):
-        super().draw(self.label.display)
 
-
-class ButtonRect:
+class ButtonRect(Button):
     def __init__(self, rect, display, action=None):
-        self.rect = rect
-        self.action = action
-        self.display = display
-
-        w, h = self.display.get_size()
-        self.rect_ratio = (self.rect.x / w, self.rect.y / h, self.rect.w / w, self.rect.h / h)
-
-    def resize(self, new_display):
-        self.display = new_display
-        w, h = self.display.get_size()
-
-        self.rect = pygame.Rect(int(self.rect_ratio[0] * w), int(self.rect_ratio[1] * h),
-                                int(self.rect_ratio[2] * w), int(self.rect_ratio[3] * h))
+        super().__init__(rect, display, action=action)
 
     def update(self, mouse_pos):
-        if rect_is_clicked(self.rect, mouse_pos):
-            self.is_active = True
-            if self.action is not None:
-                self.action()
-        else:
-            self.is_active = False
-
-    def draw(self):
-        pygame.draw.rect(self.display, BLACK, self.rect, 1)
+        super().check_is_active(mouse_pos)
 
 
 class ButtonImage:

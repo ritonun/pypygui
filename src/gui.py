@@ -57,7 +57,7 @@ class Gui:
             raise KeyError("Button name {} already attributed.".format(button_name))
 
         label = self.labels[label_name]
-        self.buttons[button_name] = ButtonLabel(label, action=action)
+        self.buttons[button_name] = ButtonLabel(label, self.display, action=action)
 
     def create_button_from_rect(self, button_name, rect, action=None):
         """Create a button from a rect.
