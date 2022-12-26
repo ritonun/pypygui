@@ -1,18 +1,7 @@
 import pygame
 from .gui_basic import center_surface, center_rect, text_objects, rect_is_clicked
 from .var import BLACK, RED, m5x7
-
-
-class Outline:
-    def __init__(self, rect, display):
-        self.rect = rect
-        self.display = display
-
-    def resize(self):
-        pass
-
-    def draw(self):
-        pass
+from .button_property import Outline
 
 
 class Label:
@@ -74,14 +63,25 @@ class Button:
         self.action = action
         self.is_active = False
 
+        self.propertys = {}
+
     def resize(self, new_display):
         self.display = new_display
         w, h = self.display.get_size()
         self.rect = pygame.Rect(int(self.rect_ratio[0] * w), int(self.rect_ratio[1] * h),
                                 int(self.rect_ratio[2] * w), int(self.rect_ratio[3] * h))
 
+        if "outline" in self.propertys:
+            self.propertys["outline"].resize(self.rect, self.display)
+
     def check_is_active(self, mouse_pos):
-        if rect_is_clicked(self.rect, mouse_pos):
+        if "outline" in self.propertys:
+            if self.propertys["outline"].outline_is_active(mouse_pos) is True:
+                self.is_active = True
+                if self.action is not None:
+                    self.action()
+
+        elif rect_is_clicked(self.rect, mouse_pos):
             self.is_active = True
             if self.action is not None:
                 self.action()
@@ -89,8 +89,15 @@ class Button:
             self.is_active = False
 
     def draw(self):
+        if "outline" in self.propertys:
+            self.propertys["outline"].draw()
+
         if self.debug:
             pygame.draw.rect(self.display, self.color, self.rect, 1)
+
+    def add_outline(self, outline_size=1, outline_color=BLACK):
+        self.propertys["outline"] = Outline(self.rect, self.display, outline_size=outline_size,
+                                            outline_color=outline_color)
 
 
 class ButtonLabel(Button):
@@ -107,6 +114,9 @@ class ButtonLabel(Button):
         self.rect = self.label.rect
         self.rect.x = self.label.pos[0]
         self.rect.y = self.label.pos[1]
+
+        if "outline" in self.propertys:
+            self.propertys["outline"].resize(self.rect, self.display)
 
     def update(self, mouse_pos):
         self.check_is_active(mouse_pos)

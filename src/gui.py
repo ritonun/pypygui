@@ -134,6 +134,12 @@ class Gui:
 
         self.labels[label_name].update_text(text)
 
+    def button_add_properties(self, button_name, property_name, **kwargs):
+        if not key_in_dict(button_name, self.buttons):
+            raise KeyError("Button name {} does not exist.".format(button_name))
+
+        self.buttons[button_name].add_property(kwargs)
+
     def update(self):
         """Update all gui element. All buttons are checked wether they are active or not.
         """

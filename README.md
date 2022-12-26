@@ -10,6 +10,13 @@ current work: outline properties & implementation of propetires in Button() clas
 2. add properties to button with outline
 3. add other properties
 
+
+### v2.?
+Focus on HUD element: 
+- pin image, etc.. on screen
+- state machine for showing different img, text, etc...
+- Easily combine img, text, button, etc...
+
 ### v0.5.0
 Focus on gui element:  
 - [x] slider
